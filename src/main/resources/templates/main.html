@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>PI-MAIN</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../CSS/mainStyle.css"/>     
+    </head>
+    <body>
+        <div class="whole">
+        <div class="titulo">
+            <h3>PI</h3>
+            <div class="barra">
+                <div class="botoes">
+                    <a th:href="@{/produtos}"><button id="btn-prod">PRODUTOS</button></a>
+                    <a th:href="@{/clientes}"><button id="btn-clien">CLIENTES</button></a>
+                    <a th:href="@{/vendas}"><button id="btn-ven">VENDAS</button></a>
+                </div>
+            </div>
+        </div>
+        <div class="foto"></div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,60 @@
+body{
+   PADDING: 0;
+   MARGIN: 0 auto;
+   BOX-SIZING: border-box;
+   font-family:sans-serif;
+   
+}
+
+
+
+.titulo{
+   background-color:#83949E;
+   width: 40%;
+   height: 100;
+      
+   display: flex;
+   align-items: center;
+   flex-direction: column;
+   
+   padding-top:120px;
+}
+
+.botoes{
+   gap:10px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   flex-direction: column;
+}
+
+h3{
+   font-size: 5rem;
+   text-shadow: 0 0.3px 0.3px #000;
+}
+
+[id^="btn-"]{
+   font-size: 1.5rem;
+   border:none;
+   border-radius: 5px;
+   width: 250px;
+   height: 40px;
+   lighting-color: black;
+   background: #29333C;
+   color:#ffff;
+   cursor: pointer;
+}
+
+[id^="btn-"]:hover{
+     box-shadow: 0 2px 6px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+.whole{
+   display:flex;
+}
+
+.foto{
+   height: 100vh;
+   width: 60%;
+   background-color: #000;
+   background-image: url("../IMG/loja.jpg");
+}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>PI-PRODUTOS</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="/JS/MainJS.js"></script>
+        <link rel="stylesheet" type="text/css" th:href="@{/CSS/produtosStyle.css}"/>     
+    </head>
+    <body>
+
+        <div class="aberto">
+            <div class="whole">
+                <p class="arrow-container" id="flechaEsquerda"><span class="arrow left-arrow"></span></p>
+                <div class="btnConteiner">
+                    <a th:href="@{/main}"><button id="btn-main">MAIN</button></a>
+                    <a th:href="@{/clientes}"><button id="btn-cliente">CLIENTES</button></a>
+                    <a th:href="@{/produtos}"><button id="btn-produto">PRODUTOS</button></a>
+                    <a th:href="@{/vendas}"><button id="btn-venda">VENDAS</button></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="barra-up">
+
+            <div class="fechado">
+                <p class="arrow-container" id="flechaDireita" ><span class="arrow right-arrow"></span></p>
+            </div>
+
+
+
+            <div class="botoes">
+                <button id="btn-cad">CADASTRAR PRODUTO</button>
+                <button id="btn-edt">EDITAR PRODUTO</button>
+                <button id="btn-exc">EXCLUIR PRODUTO</button>
+            </div>
+        </div>
+        <div class="tabela">
+            <table class="tbl-prod">
+                <tr>
+                    <th>ID</th>
+                    <th>NOME</th>
+                    <th>QUANTIDADE</th>
+                    <th>VALOR</th>
+                </tr>
+                <tr>
+                    <td>01</td>
+                    <td>lapis</td>
+                    <td>10</td>
+                    <td>R$10.00</td>   
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>

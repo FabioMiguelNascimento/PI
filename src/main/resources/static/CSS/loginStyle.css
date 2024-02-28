@@ -1,0 +1,56 @@
+body{
+   PADDING: 0;
+   MARGIN: 0 auto;
+   BOX-SIZING: border-box;
+   font-family:sans-serif;
+}
+
+.foto{
+    background-color: #C3CBCE;
+    width: 40%;
+    height: 100vh;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+}
+
+
+.foto img{
+    width: 50%;
+    height: auto;
+}
+
+
+.whole{
+    display: flex;
+    flex-direction: row;
+}
+
+.campo{
+    background-color: #29333C;
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#form1{
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+    color: white;
+}
+
+#form1 input{
+    background-color: #83949E;
+    border:none;
+    border-radius:5px;
+}
+
+#form1 button{
+    border:none;
+    border-radius:5px;
+    background-color: white;
+    width: 50%;
+    margin-left:40px;
+}

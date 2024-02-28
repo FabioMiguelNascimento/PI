@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>PI-LOGIN</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" th:href="@{/CSS/loginStyle.css}"/>     
+    </head>
+    <body>
+        <div class="whole">
+            <div class="foto">
+                <img src="../IMG/dev.svg">
+            </div> 
+            <div class="campo">
+                <div class="form">
+                    <form id="form1" th:action="@{/login}" method="post">
+                        <label for="user">Usuário</label>
+                        <input type="text" id="user" name="user"><!-- Adicionado o atributo name -->
+
+                        <label for="sen">Senha</label>
+                        <input type="password" id="sen" name="sen"><!-- Adicionado o atributo name -->
+
+                        <button type="submit" form="form1" value="Submit">Login</button>
+                        <div th:if="${not #strings.isEmpty(error)}" class="error" th:text="${error}"></div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
