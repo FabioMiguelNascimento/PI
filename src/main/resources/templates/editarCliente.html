@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>PI-EditarClientes</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../CSS/editarStyle.css"/>     
+        <script src="/JS/MainJS.js"></script>
+    </head>
+    <body>
+
+
+        <div class="aberto">
+            <div class="whole">
+                <p class="arrow-container" id="flechaEsquerda"><span class="arrow left-arrow"></span></p>
+                <div class="btnConteiner">
+                    <a th:href="@{/main}"><button id="btn-main">MAIN</button></a>
+                    <a th:href="@{/clientes}"><button id="btn-cliente">CLIENTES</button></a>
+                    <a th:href="@{/produtos}"><button id="btn-produto">PRODUTOS</button></a>
+                    <a th:href="@{/vendas}"><button id="btn-venda">VENDAS</button></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="barra-up">
+
+            <div class="fechado">
+                <p class="arrow-container" id="flechaDireita" ><span class="arrow right-arrow"></span></p>
+            </div>
+        </div>
+
+        <div class="titulo">Editar Clientes</div>
+
+        <form th:action="@{/editarCliente}" th:object="${cliente}" method="post">
+            <input type="hidden" th:field="*{id}" />
+            <label>Nome:</label>
+            <input type="text" th:field="*{nome}" />
+            <label>Número:</label>
+            <input type="text" th:field="*{numero}" />
+            <label>Email:</label>
+            <input type="text" th:field="*{email}" />
+            <label>CPF:</label>
+            <input type="text" th:field="*{cpf}" />
+            <button type="submit">Salvar</button>
+        </form>
+
+    </body>
+</html>

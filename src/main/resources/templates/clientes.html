@@ -4,11 +4,13 @@
         <title>PI-CLIENTES</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="../CSS/clientesStyle.css"/>     
+        <link rel="stylesheet" type="text/css" th:href="@{/CSS/clientesStyle.css}"/>     
         <script src="/JS/MainJS.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="/JS/clientesJS.js"></script>
     </head>
     <body>
-        
+
         <div class="aberto">
             <div class="whole">
                 <p class="arrow-container" id="flechaEsquerda"><span class="arrow left-arrow"></span></p>
@@ -30,27 +32,33 @@
 
 
             <div class="botoes">
-                <button id="btn-cad">CADASTRAR CLIENTE</button>
-                <button id="btn-edt">EDITAR CLIENTE</button>
+                <a th:href="@{/clicad}"> <button id="btn-cad">CADASTRAR CLIENTE</button></a>
+                <!--<button id="btn-edt">EDITAR CLIENTE</button>-->
                 <button id="btn-exc">EXCLUIR CLIENTE</button>
             </div>
         </div>
-        <div class="tabela">
-            <table class="tbl-prod">
-                <tr>
-                    <th>ID</th>
-                    <th>NOME</th>
-                    <th>NUMERO</th>
-                    <th>EMAIl</th>
-                    <th>CPF</th>
-                </tr>
-                <tr>
-                    <td>01</td>
-                    <td>Joao</td>
-                    <td>123456789</td>
-                    <td>joao@email.com</td>   
-                    <td>123.456.789-00</td>   
-                </tr>
+        <div class="tabela" id="tabela-clientes">
+            <table class="tbl-cli">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>NOME</th>
+                        <th>NUMERO</th>
+                        <th>EMAIL</th>
+                        <th>CPF</th>
+                        <th>EDITAR</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="cliente : ${clientes}">
+                        <td th:text="${cliente.id}"></td>
+                        <td th:text="${cliente.nome}"></td>
+                        <td th:text="${cliente.numero}"></td>
+                        <td th:text="${cliente.email}"></td>
+                        <td th:text="${cliente.cpf}"></td>
+                        <td><a th:href="@{/edicli(id=${cliente.id})}">EDITAR</a></td>
+                    </tr>
+                </tbody>
             </table>
         </div>
     </body>

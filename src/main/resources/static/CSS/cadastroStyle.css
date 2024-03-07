@@ -3,7 +3,19 @@ body{
    MARGIN: 0 auto;
    BOX-SIZING: border-box;
    font-family:sans-serif;
-    background-color:#C3CBCE;
+   background-color:#C3CBCE;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }
 
 .arrow-container{
@@ -33,32 +45,10 @@ body{
     justify-content:flex-end;
 }
 
-.barra-up{
-    display: flex;
-}
-.tbl-cli{
-    z-index: 1;
-    border-collapse: collapse;
-    border:1px solid black;
-    background: #29333C;
-    width: 100%;
-    text-align: center;
-    color: #fff;
-}
-th{
-    font-size: 1.5rem;
-    border:1px solid black;
-}
-
-td{
-    font-size:1.2rem;
-    justify-content: space-evenly
-}
-
-
 .fechado{
     display: block;
     margin-right:auto;
+    position: static;
 }
 
 .barra-up{
@@ -66,12 +56,6 @@ td{
     align-items: center;
     justify-content:space-between;
 }
-
-.botoes{
-    margin-right:auto;
-}
-
-
 
 
 
@@ -85,6 +69,14 @@ td{
     display:none;
     border:solid black;
     transition: opacity 0.5, display 0.5; 
+}
+
+.botoes{
+    margin-right:auto;
+}
+
+#btn-cadastrar{
+    margin-top:20px;
 }
 
 
@@ -110,4 +102,28 @@ td{
 
 [id^="btn-"]:hover{
      box-shadow: 0 2px 6px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+form{
+    padding-top:200px;
+   font-size: 1.4rem;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content:space-evenly;
+}
+
+input{
+   border:none;
+   font-size: 1.2rem;
+   background: #29333C;
+   color:white;
+   margin:5px 0px 5px 0px;
+}
+
+.titulo{
+    font-size: 3rem;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
 }

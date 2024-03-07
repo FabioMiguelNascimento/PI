@@ -1,6 +1,5 @@
 package com.senacead.PI.controller;
 
-import ch.qos.logback.core.model.Model;
 import com.senacead.PI.entity.Autenticacao;
 import com.senacead.PI.entity.UserSession;
 import com.senacead.PI.entity.Usuario;
@@ -49,10 +48,10 @@ public class LoginController {
         Usuario usuarioAutenticado = autenticacao.autenticar(user, sen);
         if (usuarioAutenticado != null) {
             UserSession.getInstance().setTipoUsuario(usuarioAutenticado.getTipoUsuario());
-            return "redirect:/main"; // Redirecionar para a página de dashboard após o login bem-sucedido
+            return "redirect:/main"; 
         } else {
             model.addAttribute("error", "Usuário ou senha inválidos");
-            return "login"; // Retornar para a página de login com mensagem de erro
+            return "login"; 
         }
     }
 
