@@ -19,15 +19,15 @@ public class VendaService {
     private VendaRepository vendaRepository;
 
     @Autowired
-    private ItemVendaRepository itemVendaRepository; // Injeta o ItemVendaRepository
+    private ItemVendaRepository itemVendaRepository; 
 
     @Transactional
     public boolean inserirVenda(Venda venda, List<ItemVenda> produtos, float valorTotal) {
         try {
-            vendaRepository.save(venda); // Salva a venda primeiro para obter seu ID
+            vendaRepository.save(venda); 
             for (ItemVenda item : produtos) {
-                item.setVenda(venda); // Define a venda para cada item
-                itemVendaRepository.save(item); // Salva cada item individualmente
+                item.setVenda(venda); 
+                itemVendaRepository.save(item);
             }
             return true;
         } catch (Exception e) {

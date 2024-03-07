@@ -1,3 +1,4 @@
+/*Vendas*/
 body{
    PADDING: 0;
    MARGIN: 0 auto;
@@ -33,7 +34,7 @@ body{
     justify-content:flex-end;
 }
 
-.tbl-prod{
+.tbl-ven{
     z-index: 1;
     border-collapse: collapse;
     border:1px solid black;

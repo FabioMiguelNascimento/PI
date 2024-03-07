@@ -6,5 +6,4 @@ import com.senacead.PI.entity.Produto;
 
 @Repository
 public interface ProdutoRepository extends JpaRepository<Produto, Long> {
-    // Aqui você pode adicionar métodos de consulta personalizados, se necessário
 }

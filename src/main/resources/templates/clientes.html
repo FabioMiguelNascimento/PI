@@ -4,7 +4,7 @@
         <title>PI-CLIENTES</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="../CSS/clientesStyle.css"/>     
+        <link rel="stylesheet" th:href="@{/css/clientesStyle.css}" />  
         <script src="/JS/MainJS.js"></script>
     </head>
     <body>
@@ -32,11 +32,10 @@
             <div class="botoes">
                 <a th:href="@{/clicad}"> <button id="btn-cad">CADASTRAR CLIENTE</button></a>
                 <!--<button id="btn-edt">EDITAR CLIENTE</button>-->
-                <button id="btn-exc">EXCLUIR CLIENTE</button>
+                <!--<button id="btn-exc">EXCLUIR CLIENTE</button>-->
             </div>
         </div>
-        <div class="tbl" id="tabela-clientes">
-            <table>
+            <table class="tbl-cli">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -54,10 +53,9 @@
                         <td th:text="${cliente.numero}"></td>
                         <td th:text="${cliente.email}"></td>
                         <td th:text="${cliente.cpf}"></td>
-                        <td><a th:href="@{/edicli(id=${cliente.id})}">EDITAR</a></td>
+                        <td><a th:href="@{/editarCliente(id=${cliente.id})}">EDITAR | EXCLUIR</a></td>
                     </tr>
                 </tbody>
             </table>
-        </div>
     </body>
 </html>

@@ -11,6 +11,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class LoginController {
+    
+    
+//    @GetMapping("/*")
+//    public String home() {
+//        return "login";
+//    }
 
     @GetMapping("/login")
     public String login() {
@@ -25,11 +31,6 @@ public class LoginController {
     @GetMapping("/produtos")
     public String produtos() {
         return "produtos";
-    }
-
-    @GetMapping("/clientes")
-    public String clientes() {
-        return "clientes";
     }
 
     @GetMapping("/vendas")

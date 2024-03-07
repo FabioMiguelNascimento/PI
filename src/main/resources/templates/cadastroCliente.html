@@ -29,7 +29,7 @@
             </div>
         </div>
         <div class="titulo">Cadastro Clientes</div>
-        <form id="cad" class="FormCadastro">
+        <form id="cad" class="FormCadastro" action="#" th:action="@{/clicad}" th:object="${cliente}" method="post">
             <label for="nome">Nome</label>
             <input type="text" id="nome" name="nome">
 

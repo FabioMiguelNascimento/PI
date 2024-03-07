@@ -4,7 +4,7 @@
         <title>PI-EditarClientes</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="../CSS/editarStyle.css"/>     
+        <link rel="stylesheet" type="text/css" href="../CSS/editarExcluirStyle.css"/>     
         <script src="/JS/MainJS.js"></script>
     </head>
     <body>
@@ -29,9 +29,10 @@
             </div>
         </div>
 
-        <div class="titulo">Editar Clientes</div>
+        <div class="titulo">Editar e Excluir Clientes</div>
 
-        <form th:action="@{/editarCliente}" th:object="${cliente}" method="post">
+        <form th:action="@{/salvarEdicaoCliente}" th:object="${cliente}" method="post">
+
             <input type="hidden" th:field="*{id}" />
             <label>Nome:</label>
             <input type="text" th:field="*{nome}" />
@@ -41,8 +42,16 @@
             <input type="text" th:field="*{email}" />
             <label>CPF:</label>
             <input type="text" th:field="*{cpf}" />
-            <button type="submit">Salvar</button>
-        </form>
+            <div class="botoes">
+                <button id="btn-salvar" type="submit">Salvar</button>
+            </form>
+
+            <form th:action="@{/excluirCliente}" method="post">
+                <input type="hidden" name="id" th:value="${cliente.id}" />
+                <button id="btn-excluir" type="submit" onclick="return confirm('Tem certeza que deseja excluir este cliente?')">Excluir</button>
+            </form>
+            </div>
+
 
     </body>
 </html>

@@ -56,12 +56,4 @@ public class ClienteService {
     public Optional<Cliente> obterClientePorID(Long clienteID) {
         return clienteRepository.findById(clienteID);
     }
-
-    public boolean atualizarCliente(Cliente cliente) {
-        if (clienteRepository.existsById(cliente.getId())) {
-            clienteRepository.save(cliente);
-            return true;
-        }
-        return false;
-    }
 }
