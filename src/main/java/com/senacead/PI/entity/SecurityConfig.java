@@ -3,6 +3,7 @@ package com.senacead.PI.entity;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -20,9 +21,9 @@ public class SecurityConfig {
     @Order(1)
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests((authorize) -> authorize
-                .requestMatchers("/produto/**").hasAnyRole("ADMIN","ATENDENTE")
-                .requestMatchers("/venda/**").hasAnyRole("ADMIN","VENDEDOR")
+                .authorizeHttpRequests(authorize -> authorize
+                .requestMatchers("/venda/**").hasAnyRole("GERENTE","VENDEDOR")
+                .requestMatchers("/produto/**").hasAnyRole("GERENTE","ATENDENTE")
                 .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults())
