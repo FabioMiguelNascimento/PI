@@ -16,7 +16,6 @@ O PI (Projeto de Integração) é um sistema de PDV utilizado para o cadastro de
 - Java Spring
 - JavaScript
 - Banco de dados SQL
-- Spring Boot Security
 
 ## Instalação e Uso
 1. Clone o repositório:
@@ -29,18 +28,5 @@ O PI (Projeto de Integração) é um sistema de PDV utilizado para o cadastro de
    
    mvn spring-boot:run
    
-
-## Testes
-Para testar o sistema, você pode usar os seguintes usuários:
-- Gerente: 
-  - Usuário: gerente
-  - Senha: 123
-- Atendente:
-  - Usuário: atendente
-  - Senha: 123
-- Vendedor:
-  - Usuário: vendedor
-  - Senha: 123
-
 ## Criador
 Fabio Miguel
