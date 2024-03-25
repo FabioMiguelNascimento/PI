@@ -42,8 +42,5 @@ Para testar o sistema, você pode usar os seguintes usuários:
   - Usuário: vendedor
   - Senha: 123
 
-## Contribuição
-Contribuições são bem-vindas! Siga as instruções do arquivo `CONTRIBUTING.md` para contribuir com o projeto.
-
 ## Criador
 Fabio Miguel
