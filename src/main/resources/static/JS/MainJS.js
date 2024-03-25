@@ -5,14 +5,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (flechaDireita && flechaEsquerda && aberto) {
         flechaDireita.addEventListener('click', () => {
-            aberto.style.display = "block"; 
+            aberto.style.display = "block";
         });
 
         flechaEsquerda.addEventListener('click', () => {
-            aberto.style.display = "none"; 
+            aberto.style.display = "none";
         });
     } else {
         console.error("Elementos flechaDireita, flechaEsquerda ou aberto não encontrados!");
     }
 });
+
 

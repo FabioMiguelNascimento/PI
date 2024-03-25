@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="../CSS/cadastroStyle.css"/>     
+        <script src="/JS/MainJS.js"></script>
         <title>Adicionar Itens</title>
     </head>
     <body class="tipo-usuario-[[${tipoUsuario}]]">
@@ -32,7 +33,7 @@
             <div class="sp-vendaid">
                 <button id="btn-finalizar" type="button" onclick="enviarItens()">Finalizar Venda</button>
                 <span id="vid" th:text="${venda.id}"></span>
-                <input type="hidden" id="vendaIdInput" th:value="${venda.id}">
+                <input type="hidden" id="vendaIdInput" name="vendaIdInput" th:value="${venda.id}">
                 <span id="txt-id">ID da Venda:</span>
             </div>
 
@@ -66,7 +67,7 @@
                     var produtoId = produtoOption.value;
                     var produtoNome = produtoOption.text;
                     var quantidade = quantidadeInput.value;
-                    var valorUnitario = parseFloat(produtoOption.getAttribute('data-valor')); 
+                    var valorUnitario = parseFloat(produtoOption.getAttribute('data-valor'));
 
                     if (!isNaN(valorUnitario)) {
                         var valorTotalProduto = parseFloat(quantidade) * valorUnitario;
@@ -91,8 +92,8 @@
                 var colunaValorTotalProduto = novaLinha.insertCell(5);
                 var colunaAcoes = novaLinha.insertCell(6);
 
-                colunaIdProduto.innerHTML = id; 
-                colunaId.innerHTML = id; 
+                colunaIdProduto.innerHTML = id;
+                colunaId.innerHTML = id;
                 colunaProduto.innerHTML = produto;
                 colunaQuantidade.innerHTML = quantidade;
                 colunaValorUnitario.innerHTML = valorUnitario.toFixed(2);
@@ -118,16 +119,13 @@
                     }
                 }
 
-                document.getElementById('valorTotalVenda').textContent = total.toFixed(2); 
-
-
+                document.getElementById('valorTotalVenda').textContent = total.toFixed(2);
+            }
             function removerItem(botao) {
                 var linha = botao.parentNode.parentNode;
                 linha.parentNode.removeChild(linha);
                 atualizarValorTotalVenda();
             }
-
-            var vendaId = document.getElementById('vendaIdInput').value;
 
             function enviarItens() {
                 var vendaId = document.getElementById('vendaIdInput').value;
@@ -146,7 +144,7 @@
                     var valorTotalProduto = colunas[5].textContent;
 
                     var itemVenda = {
-                        produto: {id: parseInt(produtoId)}, 
+                        produto: {id: parseInt(produtoId)},
                         quantidade: parseInt(quantidade),
                         valorUnitario: parseFloat(valorUnitario),
                         valorTotalProduto: parseFloat(valorTotalProduto)
@@ -165,12 +163,12 @@
                         .then(response => response.text())
                         .then(data => {
                             console.log('Resposta do servidor:', data);
-                            window.location.href = '/venda/vendas';
                         })
                         .catch(error => {
                             console.error('Erro ao enviar itens da venda:', error);
                         });
             }
+
         </script>
     </body>
 </html>
