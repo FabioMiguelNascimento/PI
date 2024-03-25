@@ -13,7 +13,7 @@
         <div class="top">
             <div class="sp-valorT">
                 <span id="txt-vt">Valor total: R$</span>
-                <span id="valorTotalVenda">0.00</span> <!-- Inicializa com zero -->
+                <span id="valorTotalVenda">0.00</span> 
             </div>
 
             <form id="formAdicionarItem">
@@ -36,11 +36,9 @@
                 <span id="txt-id">ID da Venda:</span>
             </div>
 
-            <!-- Formulário para adicionar itens à tabela -->
             <br>
         </div>
 
-        <!-- Tabela para exibir os itens adicionados -->
         <table id="itensTable" class="table">
             <thead>
                 <tr>
@@ -54,30 +52,25 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- Aqui serão adicionadas as linhas da tabela dinamicamente -->
             </tbody>
         </table>
         <br>
 
-        <!-- Script para adicionar itens à tabela e calcular o valor total -->
         <script>
             function adicionarItem() {
                 var produtoSelect = document.getElementById('produtoSelect');
                 var quantidadeInput = document.getElementById('quantidadeInput');
 
-                // Verifica se um produto foi selecionado e a quantidade é válida
                 if (produtoSelect.value && quantidadeInput.value > 0) {
                     var produtoOption = produtoSelect.options[produtoSelect.selectedIndex];
                     var produtoId = produtoOption.value;
                     var produtoNome = produtoOption.text;
                     var quantidade = quantidadeInput.value;
-                    var valorUnitario = parseFloat(produtoOption.getAttribute('data-valor')); // Convertendo para número decimal
+                    var valorUnitario = parseFloat(produtoOption.getAttribute('data-valor')); 
 
-                    // Verifica se o valor unitário é um número válido
                     if (!isNaN(valorUnitario)) {
                         var valorTotalProduto = parseFloat(quantidade) * valorUnitario;
 
-                        // Adiciona o item à tabela
                         adicionarItemNaTabela(produtoId, produtoNome, quantidade, valorUnitario, valorTotalProduto);
                     } else {
                         alert('O valor unitário do produto não é válido.');
@@ -98,8 +91,8 @@
                 var colunaValorTotalProduto = novaLinha.insertCell(5);
                 var colunaAcoes = novaLinha.insertCell(6);
 
-                colunaIdProduto.innerHTML = id; // Agora está usando o ID correto
-                colunaId.innerHTML = id; // Você pode decidir se deseja manter duas colunas com o mesmo ID
+                colunaIdProduto.innerHTML = id; 
+                colunaId.innerHTML = id; 
                 colunaProduto.innerHTML = produto;
                 colunaQuantidade.innerHTML = quantidade;
                 colunaValorUnitario.innerHTML = valorUnitario.toFixed(2);
@@ -118,15 +111,14 @@
 
                 for (var i = 0; i < linhas.length; i++) {
                     var colunas = linhas[i].getElementsByTagName('td');
-                    var valorTotalProduto = parseFloat(colunas[5].textContent); // Índice 5 representa a coluna de valor total do produto
+                    var valorTotalProduto = parseFloat(colunas[5].textContent);
 
                     if (!isNaN(valorTotalProduto)) {
                         total += valorTotalProduto;
                     }
                 }
 
-                document.getElementById('valorTotalVenda').textContent = total.toFixed(2); // Atualiza o valor total da venda na página
-            }
+                document.getElementById('valorTotalVenda').textContent = total.toFixed(2); 
 
 
             function removerItem(botao) {
@@ -138,7 +130,7 @@
             var vendaId = document.getElementById('vendaIdInput').value;
 
             function enviarItens() {
-                var vendaId = document.getElementById('vendaIdInput').value; // Obtém o vendaId do campo oculto
+                var vendaId = document.getElementById('vendaIdInput').value;
 
                 var tabela = document.getElementById('itensTable');
                 var linhas = tabela.getElementsByTagName('tr');
@@ -148,23 +140,22 @@
                     var linha = linhas[i];
                     var colunas = linha.getElementsByTagName('td');
 
-                    var produtoId = colunas[0].textContent; // ID do produto (primeira coluna)
+                    var produtoId = colunas[0].textContent;
                     var quantidade = colunas[3].textContent;
-                    var valorUnitario = colunas[4].textContent; // Obtém o valor unitário da coluna correspondente
+                    var valorUnitario = colunas[4].textContent;
                     var valorTotalProduto = colunas[5].textContent;
 
                     var itemVenda = {
-                        produto: {id: parseInt(produtoId)}, // Produto com ID
+                        produto: {id: parseInt(produtoId)}, 
                         quantidade: parseInt(quantidade),
-                        valorUnitario: parseFloat(valorUnitario), // Inclui o valor unitário no objeto
+                        valorUnitario: parseFloat(valorUnitario),
                         valorTotalProduto: parseFloat(valorTotalProduto)
                     };
 
                     itensVenda.push(itemVenda);
                 }
 
-                // Envie os dados para o servidor usando fetch ou outra forma de requisição AJAX
-                fetch('/venda/adicionarItens?vendaId=' + vendaId, {// Utiliza o vendaId correto na URL
+                fetch('/venda/adicionarItens?vendaId=' + vendaId, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -174,12 +165,10 @@
                         .then(response => response.text())
                         .then(data => {
                             console.log('Resposta do servidor:', data);
-                            // Adicione aqui o código para tratar a resposta do servidor, se necessário
                             window.location.href = '/venda/vendas';
                         })
                         .catch(error => {
                             console.error('Erro ao enviar itens da venda:', error);
-                            // Adicione aqui o código para tratar o erro, se necessário
                         });
             }
         </script>

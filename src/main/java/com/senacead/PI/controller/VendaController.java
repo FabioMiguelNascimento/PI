@@ -35,7 +35,7 @@ public class VendaController {
     @GetMapping("/venda/vendas")
     public String listarProdutos(Model model) {
         List<Venda> vendas = vendaService.findAll();
-        carregarClientesNoModel(model); // Chama o método para carregar clientes no modelo
+        carregarClientesNoModel(model); 
         model.addAttribute("vendas", vendas);
         return "vendas";
     }
@@ -48,7 +48,7 @@ public class VendaController {
     ) {
         List<Venda> vendasFiltradas = vendaService.findByDataBetween(dataInicio, dataFim);
         model.addAttribute("vendas", vendasFiltradas);
-        return "vendas"; // Retorna a página de vendas com os dados filtrados
+        return "vendas"; 
     }
 
 //
@@ -58,10 +58,10 @@ public class VendaController {
             @RequestParam("valorMaximo") float valorMaximo,
             Model model
     ) {
-        // Implemente a lógica para filtrar as vendas por valor
+        
         List<Venda> vendasFiltradas = vendaService.findByValorTotalBetween(valorMinimo, valorMaximo);
         model.addAttribute("vendas", vendasFiltradas);
-        carregarClientesNoModel(model); // Carrega os clientes no modelo
+        carregarClientesNoModel(model); 
         return "vendas";
     }
 
@@ -69,7 +69,7 @@ public class VendaController {
     public String filtrarPorCliente(@RequestParam("clienteId") int clienteId, Model model) {
         List<Venda> vendasFiltradas = vendaService.findByClienteId(clienteId);
         model.addAttribute("vendas", vendasFiltradas);
-        carregarClientesNoModel(model); // Chama o método para carregar clientes no modelo
+        carregarClientesNoModel(model); 
         return "vendas";
     }
 
@@ -87,7 +87,7 @@ public class VendaController {
     @GetMapping("/venda/excluirVenda")
     public String excluirVenda(@RequestParam("id") int vendaId) {
         vendaService.excluirVendaEItens(vendaId);
-        return "redirect:/venda/vendas"; // Redireciona para a página de vendas após a exclusão
+        return "redirect:/venda/vendas"; 
     }
 
     @GetMapping("/venda/inspecionarVenda")
@@ -100,7 +100,7 @@ public class VendaController {
             model.addAttribute("itensVenda", itensVenda);
             return "inspecao-venda"; // Nome da página para inspecionar a venda
         } else {
-            return "redirect:/venda/vendas"; // Redireciona para a página de vendas caso a venda não seja encontrada
+            return "redirect:/venda/vendas"; 
         }
     }
 

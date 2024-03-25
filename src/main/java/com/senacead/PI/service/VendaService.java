@@ -78,8 +78,8 @@ public class VendaService {
         if (optionalVenda.isPresent()) {
             Venda venda = optionalVenda.get();
             List<ItemVenda> itensVenda = venda.getItensVenda();
-            itemVendaRepository.deleteAll(itensVenda); // Exclui todos os itens de venda associados
-            vendaRepository.delete(venda); // Exclui a venda
+            itemVendaRepository.deleteAll(itensVenda); 
+            vendaRepository.delete(venda); 
         }
     }
 }
