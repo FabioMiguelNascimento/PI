@@ -7,8 +7,7 @@
         <link rel="stylesheet" type="text/css" href="../CSS/editarExcluirStyle.css"/>     
         <script src="/JS/MainJS.js"></script>
     </head>
-    <body>
-
+    <body class="tipo-usuario-[[${tipoUsuario}]]">
 
         <div class="aberto">
             <div class="whole">
@@ -44,14 +43,12 @@
             <input type="text" th:field="*{cpf}" />
             <div class="botoes">
                 <button id="btn-salvar" type="submit">Salvar</button>
-            </form>
+        </form>
 
-            <form th:action="@{/excluirCliente}" method="post">
-                <input type="hidden" name="id" th:value="${cliente.id}" />
-                <button id="btn-excluir" type="submit" onclick="return confirm('Tem certeza que deseja excluir este cliente?')">Excluir</button>
-            </form>
-            </div>
-
-
-    </body>
+        <form th:action="@{/excluirCliente}" method="post">
+            <input type="hidden" name="id" th:value="${cliente.id}" />
+            <button id="btn-excluir" type="submit" onclick="return confirm('Tem certeza que deseja excluir este cliente?')">Excluir</button>
+        </form>
+    </div>
+</body>
 </html>

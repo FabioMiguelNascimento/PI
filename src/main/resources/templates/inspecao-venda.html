@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="/JS/MainJS.js"></script>
+        <link rel="stylesheet" type="text/css" th:href="@{/CSS/vendasInspStyle.css}"/>     
+        <title>Inspecionar Venda</title>
+    </head>
+    <body class="tipo-usuario-[[${tipoUsuario}]]">
+        <div class="aberto">
+            <div class="whole">
+                <p class="arrow-container" id="flechaEsquerda"><span class="arrow left-arrow"></span></p>
+                <div class="btnConteiner">
+                    <a th:href="@{/main}"><button id="btn-main">MAIN</button></a>
+                    <a th:href="@{/clientes}"><button id="btn-cliente">CLIENTES</button></a>
+                    <a th:href="@{/produto/produtos}"><button id="btn-produto">PRODUTOS</button></a>
+                    <a th:href="@{/venda/vendas}"><button id="btn-venda">VENDAS</button></a>
+                </div>
+            </div>
+        </div>
+        <div class="barra-up">
+
+            <div class="fechado">
+                <p class="arrow-container" id="flechaDireita" ><span class="arrow right-arrow"></span></p>
+            </div>
+        </div>
+
+        <h1>Inspecionar Venda</h1>
+        <h2>Dados da Venda</h2>
+        <p>ID: <span th:text="${venda.id}"></span></p>
+        <p>Data Venda: <span th:text="${venda.dataVenda}"></span></p>
+        <p>Valor Total: <span th:text="${venda.valorTotal}"></span></p>
+
+        <h2>Itens da Venda</h2>
+        <table id="itensTable" class="table">
+            <thead>
+                <tr>
+                    <th>IDP</th>
+                    <th>ID</th>
+                    <th>Produto</th>
+                    <th>Quantidade</th>
+                    <th>Valor Unitário</th>
+                    <th>Valor Total Produto</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="item : ${itensVenda}">
+                    <td th:text="${item.produto.id}"></td>
+                    <td th:text="${item.id}"></td>
+                    <td th:text="${item.produto.nome}"></td>
+                    <td th:text="${item.quantidade}"></td>
+                    <td th:text="${item.valorUnitario}"></td>
+                    <td th:text="${item.valorTotalProduto}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>

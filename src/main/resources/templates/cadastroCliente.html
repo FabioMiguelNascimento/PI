@@ -7,8 +7,7 @@
         <link rel="stylesheet" type="text/css" href="../CSS/cadastroStyle.css"/>     
         <script src="/JS/MainJS.js"></script>
     </head>
-    <body>
-
+    <body class="tipo-usuario-[[${tipoUsuario}]]">
 
         <div class="aberto">
             <div class="whole">
@@ -46,6 +45,5 @@
             <div th:if="${not #strings.isEmpty(error)}" class="error" th:text="${error}"></div>
 
         </form>
-
-    </body>
+</body>
 </html>

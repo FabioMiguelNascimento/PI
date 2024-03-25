@@ -27,16 +27,16 @@ public class ClienteService {
         cliente.setCpf(cpf);
         return clienteRepository.save(cliente);
     }
-
-    public List<Cliente> obterTodosClientes() {
+  
+    public List<Cliente> findAll() {
         return clienteRepository.findAll();
     }
 
-    public Optional<Cliente> obterClientePorId(Long id) {
+    public Optional<Cliente> findById(int id) {
         return clienteRepository.findById(id);
     }
 
-    public boolean atualizarCliente(Long id, Cliente clienteAtualizado) {
+    public boolean update(int id, Cliente clienteAtualizado) {
         if (clienteRepository.existsById(id)) {
             clienteAtualizado.setId(id); 
             clienteRepository.save(clienteAtualizado);
@@ -45,15 +45,12 @@ public class ClienteService {
         return false;
     }
 
-    public boolean excluirCliente(Long id) {
+    public boolean deleteById(int id) {
         if (clienteRepository.existsById(id)) {
             clienteRepository.deleteById(id);
             return true;
         }
         return false;
     }
-
-    public Optional<Cliente> obterClientePorID(Long clienteID) {
-        return clienteRepository.findById(clienteID);
-    }
+  
 }

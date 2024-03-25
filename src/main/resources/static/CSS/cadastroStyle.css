@@ -1,27 +1,27 @@
 /*Cadastro*/
-body{
-   PADDING: 0;
-   MARGIN: 0 auto;
-   BOX-SIZING: border-box;
-   font-family:sans-serif;
-   background-color:#C3CBCE;
+body {
+    PADDING: 0;
+    MARGIN: 0 auto;
+    BOX-SIZING: border-box;
+    font-family: sans-serif;
+    background-color: #C3CBCE;
 }
 
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 /* Firefox */
 input[type=number] {
-  -moz-appearance: textfield;
+    -moz-appearance: textfield;
 }
 
-.arrow-container{
+.arrow-container {
     display: flex;
-    cursor:pointer;
+    cursor: pointer;
 }
 
 .arrow {
@@ -37,51 +37,52 @@ input[type=number] {
 .right-arrow {
     transform: rotate(45deg);
 }
+
 .left-arrow {
     transform: rotate(-135deg);
 }
 
-#flechaEsquerda{
-    align-items:flex-end;
-    justify-content:flex-end;
+#flechaEsquerda {
+    align-items: flex-end;
+    justify-content: flex-end;
 }
 
-.fechado{
+.fechado {
     display: block;
-    margin-right:auto;
+    margin-right: auto;
     position: static;
 }
 
-.barra-up{
+.barra-up {
     display: flex;
     align-items: center;
-    justify-content:space-between;
+    justify-content: space-between;
 }
 
 
 
-.aberto{
+.aberto {
     position: absolute;
     z-index: 9999;
-    overflow-block:hidden;
-    background-color:#C3CBCE;               
+    overflow-block: hidden;
+    background-color: #C3CBCE;
     width: 15%;
     height: 100%;
-    display:none;
-    border:solid black;
-    transition: opacity 0.5, display 0.5; 
+    display: none;
+    border: solid black;
+    transition: opacity 0.5, display 0.5;
 }
 
-.botoes{
-    margin-right:auto;
+.botoes {
+    margin-right: auto;
 }
 
-#btn-cadastrar{
-    margin-top:20px;
+#btn-cadastrar {
+    margin-top: 20px;
 }
 
 
-.btnConteiner{
+.btnConteiner {
     margin-top: 320px;
     gap: 10px;
     display: flex;
@@ -90,41 +91,230 @@ input[type=number] {
     justify-content: center;
 }
 
-[id^="btn-"]{
+[id^="btn-"] {
     height: 40px;
     width: 200px;
     background-color: #29333C;
-    color:#fff;
-    border:none;
+    color: #fff;
+    border: none;
     border-radius: 5px;
     font-size: 1.1rem;
     cursor: pointer;
 }
 
-[id^="btn-"]:hover{
-     box-shadow: 0 2px 6px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+[id^="btn-"]:hover {
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
 
-form{
-    padding-top:200px;
-   font-size: 1.4rem;
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   justify-content:space-evenly;
+form {
+    padding-top: 200px;
+    font-size: 1.4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
 }
 
-input{
-   border:none;
-   font-size: 1.2rem;
-   background: #29333C;
-   color:white;
-   margin:5px 0px 5px 0px;
+input {
+    border: none;
+    font-size: 1.2rem;
+    background: #29333C;
+    color: white;
+    margin: 5px 0px 5px 0px;
+    border-radius:5px;
 }
 
-.titulo{
+.titulo {
     font-size: 3rem;
     font-weight: bold;
     display: flex;
     justify-content: center;
+}
+
+
+#tbl-produtos {
+    z-index: 1;
+    border-collapse: collapse;
+    border: 1px solid black;
+    background: #29333C;
+    color: #fff;
+
+    max-width: 100dvw;
+    width: 100%;
+}
+
+th{
+    font-size: 1.5rem;
+    border: 1px solid black;
+}
+
+td {
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+h2{
+    font-size: 2rem;
+}
+
+
+
+.addProdutos{
+    position:relative;
+    width:400px;
+    height:700px;
+    background:#525252;
+    color:white;
+    margin-left:750px;
+}
+
+.child{
+    display:flex;
+    overflow:hidden;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+#fechar{
+    background:red;
+    cursor:pointer;
+    width:20px;
+    height:20px;
+    margin:10px;
+    position:absolute;
+    top:0;
+    right:0;
+    border:none;
+    text-align:center;
+    color:white;
+    border-radius:50%;
+}
+
+#produto, #cliente{
+    background:#29333C;
+    color:white;
+    border-radius:3px;
+    border:none;
+    width:250px;
+    height:50px;
+}
+
+.btn-RowBotoes{
+    display:flex;
+    align-items:center;
+    position:absolute;
+    top: 0;
+    right: 0;
+    gap:10px;
+    margin: 10px;
+}
+
+#valorTotalCompra{
+    background: white;
+    font-size: 4rem;
+    border-radius: 5px;
+}
+
+.finalizarVenda{
+    position:relative;
+    width:400px;
+    height:700px;
+    background:#525252;
+    color:white;
+    margin-left:750px;
+}
+
+.child2{
+    display:flex;
+    overflow:hidden;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+.linha-excluida {
+    background-color: rgb(228 175 175); /* Cor de fundo para indicar que a linha foi excluída */
+    transition: background-color 0.5s ease; /* Efeito de transição suave */
+}
+
+table{
+    z-index: 1;
+    border-collapse: collapse;
+    border: 1px solid black;
+    background: #29333C;
+    color: #fff;
+
+    max-width: 100dvw;
+    width: 100%;
+}
+
+select{
+    background:#29333C;
+    color:white;
+    width:240px;
+    height:30px;
+    border-radius:5px;
+}
+
+#valorTotalVenda{
+    display:inline-block;
+    height:50px;
+}
+
+#formAdicionarItem{
+    margin-top:-200px;
+    margin-bottom:30px;
+    margin-left:600px;
+
+}
+
+.sp-vendaid{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-direction:row-reverse;
+    margin-left:350px;
+}
+
+#vid{
+    background:white;
+    width:30px;
+    height:30px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:5px;
+}
+
+#btn-Excluir{
+    background:#839eb7;
+    width:100px;
+    height:30px;
+    margin-top:5px;
+    margin-bottom:5px;
+}
+
+.sp-valorT{
+    display:flex;
+    align-items:center;
+    gap:15px;
+
+}
+#txt-vt{
+    margin-left:10px
+}
+#valorTotalVenda{
+    background:white;
+    width:100px;
+    height:30px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:5px;
+}
+
+.top{
+    display:flex;
+    justify-content:space-between;
 }

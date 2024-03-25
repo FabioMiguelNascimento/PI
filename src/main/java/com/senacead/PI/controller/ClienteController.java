@@ -31,14 +31,14 @@ public class ClienteController {
 
     @GetMapping("/clientes")
     public String listarClientes(Model model) {
-        List<Cliente> clientes = clienteService.obterTodosClientes(); 
+        List<Cliente> clientes = clienteService.findAll(); 
         model.addAttribute("clientes", clientes);
         return "clientes";
     }
 
     @GetMapping("/editarCliente")
-    public String exibirFormularioEditarCliente(@RequestParam("id") Long id, Model model) {
-        Optional<Cliente> clienteOptional = clienteService.obterClientePorId(id);
+    public String exibirFormularioEditarCliente(@RequestParam("id") int id, Model model) {
+        Optional<Cliente> clienteOptional = clienteService.findById(id);
         if (clienteOptional.isPresent()) {
             Cliente cliente = clienteOptional.get();
             model.addAttribute("cliente", cliente);
@@ -50,7 +50,7 @@ public class ClienteController {
 
     @PostMapping("/salvarEdicaoCliente")
     public String salvarClienteEditado(@ModelAttribute("cliente") Cliente cliente) {
-        boolean sucesso = clienteService.atualizarCliente(cliente.getId(), cliente);
+        boolean sucesso = clienteService.update(cliente.getId(), cliente);
         if (sucesso) {
             return "redirect:/clientes"; 
         } else {
@@ -59,8 +59,8 @@ public class ClienteController {
     }
 
     @PostMapping("/excluirCliente")
-    public String excluirCliente(@RequestParam("id") Long id) {
-        boolean sucesso = clienteService.excluirCliente(id);
+    public String excluirCliente(@RequestParam("id") int id) {
+        boolean sucesso = clienteService.deleteById(id);
         if (sucesso) {
             return "redirect:/clientes";
         } else {

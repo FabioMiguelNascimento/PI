@@ -1,43 +1,32 @@
 package com.senacead.PI.entity;
 
-import jakarta.persistence.Column;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import jakarta.persistence.*;
 import lombok.Data;
+
+import jakarta.persistence.*;
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.*;
 
 @Data
 @Entity
-public class Venda {
+public class Venda implements Serializable {
 
     @Id
-    @Column (name = "ID")
-    private Long id;
-    
-    @Column (name = "NOMECLIENTE")
-    private String nomeCliente;
-    
-    @Column (name = "VALORTOTAL")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private int id;
+
+    @Column(name = "data_venda")
+    private LocalDate  dataVenda;
+
+    @Column(name = "valor_total")
     private float valorTotal;
 
-    @Column (name = "DATA")
-    private Date data;
-    
-    @Column (name = "CLIENTE")
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
     private Cliente cliente;
-    
-    @Column (name = "NOMEVENDA")
-    private String nomeVenda;
-    
-    @Column (name = "ITENS")
-    private List<ItemVenda> itens;
 
-    public Venda() {
-        this.itens = new ArrayList<>();
-        this.data = new Date();
-        this.cliente = new Cliente();
-        this.nomeCliente = "";
-    }
+    @OneToMany(mappedBy = "venda", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ItemVenda> itensVenda = new ArrayList<>(); // Renomeei para itensVenda
 
 }

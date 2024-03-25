@@ -7,8 +7,7 @@
         <link rel="stylesheet" th:href="@{/css/clientesStyle.css}" />  
         <script src="/JS/MainJS.js"></script>
     </head>
-    <body>
-
+    <body class="tipo-usuario-[[${tipoUsuario}]]">
         <div class="aberto">
             <div class="whole">
                 <p class="arrow-container" id="flechaEsquerda"><span class="arrow left-arrow"></span></p>
@@ -31,31 +30,29 @@
 
             <div class="botoes">
                 <a th:href="@{/clicad}"> <button id="btn-cad">CADASTRAR CLIENTE</button></a>
-                <!--<button id="btn-edt">EDITAR CLIENTE</button>-->
-                <!--<button id="btn-exc">EXCLUIR CLIENTE</button>-->
             </div>
         </div>
-            <table class="tbl-cli">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>NOME</th>
-                        <th>NUMERO</th>
-                        <th>EMAIL</th>
-                        <th>CPF</th>
-                        <th>EDITAR</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="cliente : ${clientes}">
-                        <td th:text="${cliente.id}"></td>
-                        <td th:text="${cliente.nome}"></td>
-                        <td th:text="${cliente.numero}"></td>
-                        <td th:text="${cliente.email}"></td>
-                        <td th:text="${cliente.cpf}"></td>
-                        <td><a th:href="@{/editarCliente(id=${cliente.id})}">EDITAR | EXCLUIR</a></td>
-                    </tr>
-                </tbody>
-            </table>
-    </body>
+        <table class="tbl-cli">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>NOME</th>
+                    <th>NUMERO</th>
+                    <th>EMAIL</th>
+                    <th>CPF</th>
+                    <th>DETALHES</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="cliente : ${clientes}">
+                    <td th:text="${cliente.id}"></td>
+                    <td th:text="${cliente.nome}"></td>
+                    <td th:text="${cliente.numero}"></td>
+                    <td th:text="${cliente.email}"></td>
+                    <td th:text="${cliente.cpf}"></td>
+                    <td><a th:href="@{/editarCliente(id=${cliente.id})}">EDITAR | EXCLUIR</a></td>
+                </tr>
+            </tbody>
+        </table>
+</body>
 </html>

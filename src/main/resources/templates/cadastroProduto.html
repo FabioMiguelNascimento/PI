@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>PI-CadastroProdutos</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../CSS/cadastroStyle.css"/>     
+        <script src="/JS/MainJS.js"></script>
+    </head>
+    <body class="tipo-usuario-[[${tipoUsuario}]]">
+
+            <div class="aberto">
+                <div class="whole">
+                    <p class="arrow-container" id="flechaEsquerda"><span class="arrow left-arrow"></span></p>
+                    <div class="btnConteiner">
+                        <a th:href="@{/main}"><button id="btn-main">MAIN</button></a>
+                        <a th:href="@{/clientes}"><button id="btn-cliente">CLIENTES</button></a>
+                        <a th:href="@{/produto/produtos}"><button id="btn-produto">PRODUTOS</button></a>
+                        <a th:href="@{/venda/vendas}"><button id="btn-venda">VENDAS</button></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="barra-up">
+
+                <div class="fechado">
+                    <p class="arrow-container" id="flechaDireita" ><span class="arrow right-arrow"></span></p>
+                </div>
+            </div>
+
+            <div class="titulo">Cadastro Produtos</div>
+
+            <form id="cad" class="FormCadastro" action="#" th:action="@{/produto/procad}" th:object="${produto}" method="post">
+                <label for="nome">Nome</label>
+                <input type="text" id="nome" name="nome">
+
+                <label for="quantidade">Quantidade</label>
+                <input type="number" id="quantidade" placeholder="0" name="quantidade">
+
+                <label for="valor">Valor</label>
+                <input type="float" id="valor" placeholder="00.00" name="valor"> 
+
+                <button id="btn-cadastrar"type="submit" form="cad" value="Submit">Cadastrar</button>
+                <div th:if="${not #strings.isEmpty(error)}" class="error" th:text="${error}"></div>
+
+            </form>
+    </body>
+</html>

@@ -8,49 +8,147 @@
         <script src="/JS/MainJS.js"></script>
         <link rel="stylesheet" type="text/css" th:href="@{/CSS/vendasStyle.css}"/>     
     </head>
-    <body>
-        
+    <body class="tipo-usuario-[[${tipoUsuario}]]" id="venda">
+
         <div class="aberto">
             <div class="whole">
                 <p class="arrow-container" id="flechaEsquerda"><span class="arrow left-arrow"></span></p>
                 <div class="btnConteiner">
                     <a th:href="@{/main}"><button id="btn-main">MAIN</button></a>
                     <a th:href="@{/clientes}"><button id="btn-cliente">CLIENTES</button></a>
-                    <a th:href="@{/produtos}"><button id="btn-produto">PRODUTOS</button></a>
-                    <a th:href="@{/vendas}"><button id="btn-venda">VENDAS</button></a>
+                    <a th:href="@{/produto/produtos}"><button id="btn-produto">PRODUTOS</button></a>
+                    <a th:href="@{/venda/vendas}"><button id="btn-venda">VENDAS</button></a>
                 </div>
             </div>
         </div>
         <div class="barra-up">
-            
+
             <div class="fechado">
                 <p class="arrow-container" id="flechaDireita" ><span class="arrow right-arrow"></span></p>
             </div>
-            
+
             <div class="botoes">
-                <button id="btn-cad">CADASTRAR VENDA</button>
-                <button id="btn-insp">INSPECIONAR VENDA</button>
-                <button id="btn-exc">EXCLUIR VENDA</button>
-                <button id="btn-rel">RELATORIO</button>
+                <a  th:href="@{/venda/adicionarVenda}"><button id="btn-cad">CADASTRAR VENDA</button></a>
+                <button onclick="abrirFiltros()" id="btn-rel">FILTROS</button>
             </div>
+        </div>
+        <div id="filtros" style="display: none;">
+            <div class="botoesF">
+                <button id="btn-dataF"  onclick="abrirDatasFiltro()">Filtrar por Período</button>
+                <button id="btn-valorF" onclick="abrirValoresFiltro()">Filtrar por Valores</button>
+                <button id="btn-clienteF"  onclick="abrirClienteFiltro()">Filtrar por Cliente</button>
+            </div>
+            <a onclick="fechar()" id="fechar">X</a>
         </div>
         <div class="tabela">
             <table class="tbl-ven">
                 <tr>
                     <th>ID</th>
                     <th>NOME CLIENTE</th>
-                    <th>NOME VENDA</th>
                     <th>VALOR</th>
                     <th>DATA</th>
+                    <th>DETALHES</th>
                 </tr>
-                <tr>
-                    <td>01</td>
-                    <td>Cleber</td>
-                    <td>Venda 01</td>
-                    <td>200.00</td>
-                    <td>14/02/2024</td>
+                <tr th:each="venda : ${vendas}">
+                    <td th:text="${venda.id}"></td>
+                    <td th:text="${venda.cliente.nome}"></td>
+                    <td th:text="${venda.valorTotal}"></td>
+                    <td th:text="${venda.dataVenda}"></td>
+                    <td>
+                        <a th:href="@{/venda/excluirVenda(id=${venda.id})}">EXCLUIR</a>
+                        <a th:href="@{/venda/inspecionarVenda(id=${venda.id})}">INSPECIONAR</a>
+                    </td>
                 </tr>
             </table>
         </div>
+
+        <div class="por-periodo" style="display:none;">
+            <form action="/venda/vendas/filtrarPeriodo" method="get" id="por-periodo">
+                <label for="dataInicio">Data de Início:</label>
+                <input type="date" id="dataInicio" name="dataInicio">
+
+                <label for="dataFim">Data de Fim:</label>
+                <input type="date" id="dataFim" name="dataFim">
+
+                <button style="border:0.2rem groove white;" type="submit" id="btn-filtrar">Filtrar por Período</button>
+            </form>
+            <a onclick="fechar()" id="fechar">X</a>
+        </div>
+
+        <div class="por-valor" style="display:none;">
+            <form method="get" id="por-valor" action="/venda/venda/filtrarValor">
+                <label for="valorMinimo">Valor Mínimo:</label>
+                <input type="number" id="valorMinimo" name="valorMinimo">
+
+                <label for="valorMaximo">Valor Máximo:</label>
+                <input type="number" id="valorMaximo" name="valorMaximo">
+
+                <button style="border:0.2rem groove white;" type="submit" id="btn-">Filtrar por Valor</button>
+            </form>
+            <a onclick="fechar()" id="fechar">X</a>
+        </div>
+
+
+        <div class="por-cliente" style="display:none;">
+            <form method="get" th:action="@{/venda/venda/filtrarCliente}" id="por-cliente">
+                <label for="nomeCliente">Nome do Cliente:</label>
+                <select id="clienteSelect" name="clienteId">
+                    <option value="" disabled selected>Selecione um cliente</option>
+                    <option th:each="cliente : ${clientes}" th:value="${cliente.id}" th:text="${cliente.nome}"></option>
+                </select>
+                <button type="submit" style="border: 0.2rem groove white;" id="btn-filtrar-cliente">Filtrar por Cliente</button>
+            </form>
+            <a onclick="fechar()" id="fechar">X</a>
+        </div>
+        <script th:inline="javascript">
+            function filtrarPorPeriodo() {
+                var dataInicio = document.getElementById('dataInicio').value;
+                var dataFim = document.getElementById('dataFim').value;
+
+                // Realiza a requisição AJAX para filtrar as vendas por período
+                fetch('/venda/filtrarPeriodo?dataInicio=' + dataInicio + '&dataFim=' + dataFim)
+                        .then(response => response.text())
+                        .then(data => {
+                            // Atualiza a div da tabela com os resultados da filtragem
+                            document.getElementById('tabela').innerHTML = data;
+                        })
+                        .catch(error => {
+                            console.error('Erro ao filtrar por período:', error);
+                        });
+            }
+
+            const clienteF = document.querySelector(".por-cliente");
+            const dataF = document.querySelector(".por-periodo");
+            const valorF = document.querySelector(".por-valor");
+            const botoesF = document.getElementById('filtros');
+            const fecharF = document.getElementById('fechar');
+
+            function fechar() {
+                clienteF.style.display = "none";
+                dataF.style.display = "none";
+                valorF.style.display = "none";
+                botoesF.style.display = "none";
+            }
+
+            function abrirFiltros() {
+                botoesF.style.display = "block";
+            }
+
+            function abrirClienteFiltro() {
+                clienteF.style.display = "block";
+            }
+
+            function abrirDatasFiltro() {
+                dataF.style.display = "block";
+            }
+
+            function abrirValoresFiltro() {
+                valorF.style.display = "block";
+            }
+
+
+            verificarTipoUsuario('<%= tipoUsuario %>');
+
+        </script>
     </body>
 </html>

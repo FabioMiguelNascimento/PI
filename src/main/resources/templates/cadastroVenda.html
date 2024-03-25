@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../CSS/cadastroStyle.css"/>    
+        <script type="text/javascript" th:src="@{/JS/MainJS.js}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <title>CadastrarVenda</title>
+    </head>
+    <body class="tipo-usuario-[[${tipoUsuario}]]">
+
+        <div class="aberto">
+            <div class="whole">
+                <p class="arrow-container" id="flechaEsquerda"><span class="arrow left-arrow"></span></p>
+                <div class="btnConteiner">
+                    <a th:href="@{/main}"><button id="btn-main">MAIN</button></a>
+                    <a th:href="@{/clientes}"><button id="btn-cliente">CLIENTES</button></a>
+                    <a th:href="@{/produto/produtos}"><button id="btn-produto">PRODUTOS</button></a>
+                    <a th:href="@{/venda/vendas}"><button id="btn-venda">VENDAS</button></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="barra-up">
+
+            <div class="fechado">
+                <p class="arrow-container" id="flechaDireita" ><span class="arrow right-arrow"></span></p>
+            </div>
+        </div>
+
+        <div class="titulo">Cadastro Venda</div>
+
+        <form id="cad" class="FormCadastro" action="#" th:action="@{/venda/cadastrarItens}" th:object="${venda}" method="post">
+            <input type="hidden" id="clienteId" name="clienteId">
+
+            <label for="cliente">Cliente</label>
+            <select id="clienteSelect" th:field="*{cliente.id}" onchange="updateHiddenInput()">
+                <option th:each="cliente : ${clientes}" th:value="${cliente.id}" th:text="${cliente.id + ' - ' + cliente.nome}"></option>
+            </select>
+
+            <label for="data">Data</label>
+            <input type="date" id="data" name="data" th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}" placeholder="yyyy-mm-dd">
+
+
+            <span th:text= "${venda.id}"></span> 
+            <input type="hidden" id="vendaId" name="vendaId" th:value="${venda.id}"> <!-- Campo hidden para enviar o ID da venda -->
+
+            <button id="btn-cadastrar" type="submit" form="cad">Cadastrar</button>
+            <div th:if="${not #strings.isEmpty(error)}" class="error" th:text="${error}"></div>
+        </form>
+
+        <script>
+            window.onclick = function updateHiddenInput() {
+                var clienteSelect = document.getElementById('clienteSelect');
+                var clienteIdInput = document.getElementById('clienteId');
+
+                clienteIdInput.value = clienteSelect.value;
+            };
+
+        </script>
+</body>
+</html>

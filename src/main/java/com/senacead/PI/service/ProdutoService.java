@@ -4,9 +4,10 @@ import com.senacead.PI.entity.Produto;
 import com.senacead.PI.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
@@ -15,31 +16,51 @@ public class ProdutoService {
     @Autowired
     private ProdutoRepository produtoRepository;
 
-    public void cadastrarProduto(Produto produto) {
-        produtoRepository.save(produto);
+    @Autowired
+    public ProdutoService(ProdutoRepository rodutoRepository) {
+        this.produtoRepository = produtoRepository;
     }
 
-    public List<Produto> obterTodosProdutos() {
+    public Produto save(String nome, int quantidade, float valor) {
+        Produto produto = new Produto();
+        produto.setNome(nome);
+        produto.setQuantidade(quantidade);
+        produto.setValor(valor);
+        return produtoRepository.save(produto);
+    }
+
+    public List<Produto> findAll() {
         return produtoRepository.findAll();
     }
 
-    public boolean editarProduto(Produto produto) {
-        if (produtoRepository.existsById(produto.getId())) {
-            produtoRepository.save(produto);
+    public List<Produto> findAllById(List<Integer> ids) {
+        return produtoRepository.findAllById(ids);
+    }
+
+    public Optional<Produto> findById(int id) {
+        return produtoRepository.findById(id);
+    }
+
+    public boolean update(int id, Produto produtoAtualizado) {
+        if (produtoRepository.existsById(id)) {
+            produtoAtualizado.setId(id);
+            produtoRepository.save(produtoAtualizado);
             return true;
         }
         return false;
     }
 
-    public boolean excluirProduto(Long produtoID) {
-        if (produtoRepository.existsById(produtoID)) {
-            produtoRepository.deleteById(produtoID);
+    public boolean deleteById(int id) {
+        if (produtoRepository.existsById(id)) {
+            produtoRepository.deleteById(id);
             return true;
         }
         return false;
     }
 
-    public Produto obterProdutoPorID(Long produtoID) {
-        return produtoRepository.findById(produtoID).orElse(null);
+
+    public Optional<Produto> findByProdutoId(int id) {
+        return produtoRepository.findById(id);
     }
+
 }

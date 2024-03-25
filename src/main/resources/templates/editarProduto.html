@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>PI-EditarProduto</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../CSS/editarExcluirStyle.css"/>     
+        <script src="/JS/MainJS.js"></script>
+    </head>
+        <body class="tipo-usuario-[[${tipoUsuario}]]">
+
+            <div class="aberto">
+                <div class="whole">
+                    <p class="arrow-container" id="flechaEsquerda"><span class="arrow left-arrow"></span></p>
+                    <div class="btnConteiner">
+                        <a th:href="@{/main}"><button id="btn-main">MAIN</button></a>
+                        <a th:href="@{/clientes}"><button id="btn-cliente">CLIENTES</button></a>
+                        <a th:href="@{/produto/produtos}"><button id="btn-produto">PRODUTOS</button></a>
+                        <a th:href="@{/venda/vendas}"><button id="btn-venda">VENDAS</button></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="barra-up">
+
+                <div class="fechado">
+                    <p class="arrow-container" id="flechaDireita" ><span class="arrow right-arrow"></span></p>
+                </div>
+            </div>
+
+            <div class="titulo">Editar e Excluir Produtos</div>
+
+            <form th:action="@{/produto/salvarEdicaoProduto}" th:object="${produto}" method="post">
+
+                <input type="hidden" th:field="*{id}" />
+                <label>Nome:</label>
+                <input type="text" th:field="*{nome}" />
+                <label>Quantidade</label>
+                <input type="number" th:field="*{quantidade}" />
+                <label>Valor</label>
+                <input type="number" th:field="*{valor}" />
+                <div class="botoes">
+                    <button id="btn-salvar" type="submit">Salvar</button>
+            </form>
+
+            <form th:action="@{/produto/excluirProduto}" method="post">
+                <input type="hidden" name="id" th:value="${produto.id}" />
+                <button id="btn-excluir" type="submit" onclick="return confirm('Tem certeza que deseja excluir este produto?')">Excluir</button>
+            </form>
+        </div>
+</body>
+</html>

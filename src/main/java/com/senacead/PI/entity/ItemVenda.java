@@ -1,33 +1,31 @@
 package com.senacead.PI.entity;
 
 import jakarta.persistence.*;
-import java.io.Serializable;
 import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "itemVenda")
-public class ItemVenda implements Serializable {
+@Table(name = "item_venda")
+public class ItemVenda {
 
-    @Column(name = "ID")
     @Id
-    private Long id;
-
-    @Column(name = "NOMEPRODUTO")
-    private String nomeProduto;
-
-    @Column(name = "QUANTIDADE")
-    private int quantidade;
-
-    @Column(name = "VALORUNITARIO")
-    private float valorUnitario;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     @ManyToOne
-    @JoinColumn(name = "IDVENDA")
-    private Venda venda;
+    @JoinColumn(name = "produto_id")
+    private Produto produto;
 
-    public void setVenda(Venda venda) {
-        this.venda = venda;
-    }
+    private int quantidade;
+
+    @Column(name = "valor_unitario")
+    private float valorUnitario;
+
+    @Column(name = "valor_total_produto")
+    private float valorTotalProduto;
+
+    @ManyToOne
+    @JoinColumn(name = "venda_id")
+    private Venda venda;
 
 }

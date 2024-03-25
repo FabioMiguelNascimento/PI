@@ -1,9 +1,9 @@
 /*Produtos*/
 body{
-   PADDING: 0;
-   MARGIN: 0 auto;
-   BOX-SIZING: border-box;
-   font-family:sans-serif;
+    PADDING: 0;
+    MARGIN: 0 auto;
+    BOX-SIZING: border-box;
+    font-family:sans-serif;
     background-color:#C3CBCE;
 }
 
@@ -73,14 +73,11 @@ td{
 }
 
 
-
-
-
 .aberto{
     position: absolute;
     z-index: 9999;
     overflow-block:hidden;
-    background-color:#C3CBCE;               
+    background-color:#C3CBCE;
     width: 15%;
     height: 100%;
     display:none;
@@ -108,5 +105,76 @@ td{
 }
 
 [id^="btn-"]:hover{
-     box-shadow: 0 2px 6px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    box-shadow: 0 2px 6px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+
+#filtros{
+    width:300px;
+    height:400px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index:10;
+    background:#00000054;
+}
+
+.botoesF{
+    position:relative;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    gap:40px;
+    height:inherit;
+    width:inherit;
+}
+
+#fechar{
+    position:absolute;
+    top:0;
+    right:0;
+    border-radius:50%;
+    background:red;
+    color:white;
+    margin:10px;
+    cursor:pointer;
+}
+
+[class^="por-"]{
+    width:500px;
+    height:500px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index:11;
+    background:#29333C;
+    color:white;
+    border:0.5rem solid black;
+    border-radius:5px;
+
+}
+
+[id^="por-"]{
+    position:relative;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    gap:20px;
+    height:inherit;
+    width:inherit;
+}
+
+input{
+    height: 40px;
+    width: 200px;
+    background-color: #29333C;
+    color:#fff;
+    border:1px solid white;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    cursor: pointer;
 }

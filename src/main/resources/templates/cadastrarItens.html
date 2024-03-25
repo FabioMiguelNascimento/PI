@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../CSS/cadastroStyle.css"/>     
+        <title>Adicionar Itens</title>
+    </head>
+    <body class="tipo-usuario-[[${tipoUsuario}]]">
+
+        <h1 class="titulo">Adicionar Itens à Venda</h1>
+
+        <div class="top">
+            <div class="sp-valorT">
+                <span id="txt-vt">Valor total: R$</span>
+                <span id="valorTotalVenda">0.00</span> <!-- Inicializa com zero -->
+            </div>
+
+            <form id="formAdicionarItem">
+                <label for="produtoSelect">Produto</label>
+                <select id="produtoSelect">
+                    <option value="" disabled selected>Selecione um produto</option>
+                    <option th:each="produto : ${produtos}" th:value="${produto.id}" th:text="${produto.id + ' - ' + produto.nome + ' - R$' + produto.valor}" th:attr="data-valor=${produto.valor}"></option>
+                </select>
+
+                <label for="quantidadeInput">Quantidade</label>
+                <input type="number" id="quantidadeInput" name="quantidade" min="1">
+
+                <button id="btn-adicionar" type="button" onclick="adicionarItem()">Adicionar Item</button>
+            </form>
+
+            <div class="sp-vendaid">
+                <button id="btn-finalizar" type="button" onclick="enviarItens()">Finalizar Venda</button>
+                <span id="vid" th:text="${venda.id}"></span>
+                <input type="hidden" id="vendaIdInput" th:value="${venda.id}">
+                <span id="txt-id">ID da Venda:</span>
+            </div>
+
+            <!-- Formulário para adicionar itens à tabela -->
+            <br>
+        </div>
+
+        <!-- Tabela para exibir os itens adicionados -->
+        <table id="itensTable" class="table">
+            <thead>
+                <tr>
+                    <th name="idProduto" id="idProduto">IDP</th>
+                    <th>ID</th>
+                    <th>Produto</th>
+                    <th>Quantidade</th>
+                    <th>Valor Unitário</th>
+                    <th>Valor Total Produto</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Aqui serão adicionadas as linhas da tabela dinamicamente -->
+            </tbody>
+        </table>
+        <br>
+
+        <!-- Script para adicionar itens à tabela e calcular o valor total -->
+        <script>
+            function adicionarItem() {
+                var produtoSelect = document.getElementById('produtoSelect');
+                var quantidadeInput = document.getElementById('quantidadeInput');
+
+                // Verifica se um produto foi selecionado e a quantidade é válida
+                if (produtoSelect.value && quantidadeInput.value > 0) {
+                    var produtoOption = produtoSelect.options[produtoSelect.selectedIndex];
+                    var produtoId = produtoOption.value;
+                    var produtoNome = produtoOption.text;
+                    var quantidade = quantidadeInput.value;
+                    var valorUnitario = parseFloat(produtoOption.getAttribute('data-valor')); // Convertendo para número decimal
+
+                    // Verifica se o valor unitário é um número válido
+                    if (!isNaN(valorUnitario)) {
+                        var valorTotalProduto = parseFloat(quantidade) * valorUnitario;
+
+                        // Adiciona o item à tabela
+                        adicionarItemNaTabela(produtoId, produtoNome, quantidade, valorUnitario, valorTotalProduto);
+                    } else {
+                        alert('O valor unitário do produto não é válido.');
+                    }
+                } else {
+                    alert('Por favor, selecione um produto e informe uma quantidade válida.');
+                }
+            }
+
+            function adicionarItemNaTabela(id, produto, quantidade, valorUnitario, valorTotalProduto) {
+                var tabela = document.getElementById('itensTable').getElementsByTagName('tbody')[0];
+                var novaLinha = tabela.insertRow();
+                var colunaIdProduto = novaLinha.insertCell(0);
+                var colunaId = novaLinha.insertCell(1);
+                var colunaProduto = novaLinha.insertCell(2);
+                var colunaQuantidade = novaLinha.insertCell(3);
+                var colunaValorUnitario = novaLinha.insertCell(4);
+                var colunaValorTotalProduto = novaLinha.insertCell(5);
+                var colunaAcoes = novaLinha.insertCell(6);
+
+                colunaIdProduto.innerHTML = id; // Agora está usando o ID correto
+                colunaId.innerHTML = id; // Você pode decidir se deseja manter duas colunas com o mesmo ID
+                colunaProduto.innerHTML = produto;
+                colunaQuantidade.innerHTML = quantidade;
+                colunaValorUnitario.innerHTML = valorUnitario.toFixed(2);
+                colunaValorUnitario.innerHTML = valorUnitario.toFixed(2);
+                colunaValorTotalProduto.innerHTML = valorTotalProduto.toFixed(2);
+                colunaAcoes.innerHTML = '<button id="btn-Excluir" type="button" onclick="removerItem(this)">Remover</button>';
+
+                // Atualiza o valor total da venda
+                atualizarValorTotalVenda();
+            }
+
+            function atualizarValorTotalVenda() {
+                var tabela = document.getElementById('itensTable').getElementsByTagName('tbody')[0];
+                var linhas = tabela.getElementsByTagName('tr');
+                var total = 0;
+
+                for (var i = 0; i < linhas.length; i++) {
+                    var colunas = linhas[i].getElementsByTagName('td');
+                    var valorTotalProduto = parseFloat(colunas[5].textContent); // Índice 5 representa a coluna de valor total do produto
+
+                    if (!isNaN(valorTotalProduto)) {
+                        total += valorTotalProduto;
+                    }
+                }
+
+                document.getElementById('valorTotalVenda').textContent = total.toFixed(2); // Atualiza o valor total da venda na página
+            }
+
+
+            function removerItem(botao) {
+                var linha = botao.parentNode.parentNode;
+                linha.parentNode.removeChild(linha);
+                atualizarValorTotalVenda();
+            }
+
+            var vendaId = document.getElementById('vendaIdInput').value;
+
+            function enviarItens() {
+                var vendaId = document.getElementById('vendaIdInput').value; // Obtém o vendaId do campo oculto
+
+                var tabela = document.getElementById('itensTable');
+                var linhas = tabela.getElementsByTagName('tr');
+                var itensVenda = [];
+
+                for (var i = 1; i < linhas.length; i++) {
+                    var linha = linhas[i];
+                    var colunas = linha.getElementsByTagName('td');
+
+                    var produtoId = colunas[0].textContent; // ID do produto (primeira coluna)
+                    var quantidade = colunas[3].textContent;
+                    var valorUnitario = colunas[4].textContent; // Obtém o valor unitário da coluna correspondente
+                    var valorTotalProduto = colunas[5].textContent;
+
+                    var itemVenda = {
+                        produto: {id: parseInt(produtoId)}, // Produto com ID
+                        quantidade: parseInt(quantidade),
+                        valorUnitario: parseFloat(valorUnitario), // Inclui o valor unitário no objeto
+                        valorTotalProduto: parseFloat(valorTotalProduto)
+                    };
+
+                    itensVenda.push(itemVenda);
+                }
+
+                // Envie os dados para o servidor usando fetch ou outra forma de requisição AJAX
+                fetch('/venda/adicionarItens?vendaId=' + vendaId, {// Utiliza o vendaId correto na URL
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(itensVenda)
+                })
+                        .then(response => response.text())
+                        .then(data => {
+                            console.log('Resposta do servidor:', data);
+                            // Adicione aqui o código para tratar a resposta do servidor, se necessário
+                            window.location.href = '/venda/vendas';
+                        })
+                        .catch(error => {
+                            console.error('Erro ao enviar itens da venda:', error);
+                            // Adicione aqui o código para tratar o erro, se necessário
+                        });
+            }
+        </script>
+    </body>
+</html>
